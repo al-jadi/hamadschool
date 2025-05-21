@@ -1,0 +1,138 @@
+/* القوائم المنسدلة والتنقل */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* تحسينات للقائمة الجانبية */
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-left: 1px solid #dee2e6;
+  height: 100%;
+}
+
+.sidebar h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 5px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.sidebar ul li a.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* قائمة منسدلة في الشريط الجانبي */
+.sidebar-dropdown {
+  position: relative;
+}
+
+.sidebar-dropdown-content {
+  display: none;
+  padding-right: 15px;
+}
+
+.sidebar-dropdown.active .sidebar-dropdown-content {
+  display: block;
+}
+
+.sidebar-dropdown > a::after {
+  content: "▼";
+  float: left;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.sidebar-dropdown.active > a::after {
+  content: "▲";
+}
+
+/* تحسينات للوحة التحكم */
+.admin-controls {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #dee2e6;
+}
+
+.admin-controls h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.admin-controls ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-controls ul li a {
+  display: block;
+  padding: 8px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.admin-controls ul li a:hover {
+  background-color: var(--secondary-color);
+}

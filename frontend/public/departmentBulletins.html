@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشرات الأقسام - نظام إدارة المدرسة</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        .bulletins-content {
+            padding: 20px;
+        }
+        .bulletin-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .bulletin-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .bulletin-meta {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .bulletin-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .acknowledge-btn {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .acknowledged-text {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        .add-bulletin-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .filter-options {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية المحدثة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head"><a href="users.html">إدارة المستخدمين</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="attendance.html">تسجيل الحضور</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="behavior.html">تقارير السلوك</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor"><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="permissions.html">أذونات الخروج</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="schedules.html">الجداول الدراسية</a></li>
+                <li data-role="system_admin,assistant_manager,department_head"><a href="substitutions.html">الاستبدالات المؤقتة</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="departmentBulletins.html">نشرات الأقسام</a></li> <!-- Added Dept Bulletins Link -->
+                <!-- TODO: Add Parent Bulletins Link -->
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="reports.html">التقارير</a></li>
+                <li data-role="system_admin"><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content bulletins-content">
+            <h2>نشرات الأقسام</h2>
+
+            <button class="add-bulletin-btn" data-role="department_head" style="display: none;">إنشاء نشرة جديدة</button>
+
+            <div class="filter-options" data-role="system_admin,assistant_manager,admin_supervisor">
+                <label for="department-filter">القسم:</label>
+                <select id="department-filter" class="form-select d-inline-block w-auto">
+                    <option value="">الكل</option>
+                    <!-- Departments will be loaded here -->
+                </select>
+                <label for="status-filter">الحالة:</label>
+                <select id="status-filter" class="form-select d-inline-block w-auto">
+                    <option value="">الكل</option>
+                    <option value="draft">مسودة</option>
+                    <option value="published">منشورة</option>
+                    <option value="archived">مؤرشفة</option>
+                </select>
+                <button id="filter-btn" class="btn btn-primary">تصفية</button>
+            </div>
+
+            <div id="bulletins-list">
+                <!-- Bulletin cards will be loaded here by JavaScript -->
+                <p class="text-center">جارٍ تحميل النشرات...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Bulletin Modal -->
+    <div class="modal fade" id="bulletin-modal" tabindex="-1" aria-labelledby="bulletin-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="bulletin-modal-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bulletin-modal-title">إنشاء/تعديل نشرة قسم</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="bulletin-id">
+                        <div class="mb-3">
+                            <label for="bulletin-title" class="form-label">العنوان:</label>
+                            <input type="text" class="form-control" id="bulletin-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bulletin-content" class="form-label">المحتوى:</label>
+                            <textarea class="form-control" id="bulletin-content" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bulletin-status" class="form-label">الحالة:</label>
+                            <select class="form-select" id="bulletin-status">
+                                <option value="draft">مسودة</option>
+                                <option value="published">نشر</option>
+                                <option value="archived">أرشفة</option>
+                            </select>
+                        </div>
+                        <!-- TODO: Add attachment upload functionality if needed -->
+                        <!-- <div class="mb-3">
+                            <label for="bulletin-attachment" class="form-label">مرفق (اختياري):</label>
+                            <input type="file" class="form-control" id="bulletin-attachment">
+                        </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="submit" class="btn btn-primary">حفظ النشرة</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Acknowledgements Modal -->
+    <div class="modal fade" id="acknowledgements-modal" tabindex="-1" aria-labelledby="acknowledgements-modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="acknowledgements-modal-title">تأكيدات القراءة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="acknowledgements-list" class="list-group">
+                        <!-- Acknowledgement list items will be loaded here -->
+                        <li class="list-group-item text-center">جارٍ التحميل...</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script>
+    <script src="js/top-nav.js"></script>
+    <script src="js/departmentBulletins.js"></script> <!-- Add bulletins specific logic -->
+</body>
+</html>
+

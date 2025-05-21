@@ -1,0 +1,150 @@
+/* أنماط القائمة الرئيسية للأجهزة المحمولة */
+@media (max-width: 768px) {
+  /* إخفاء الشريط الجانبي الأصلي */
+  .sidebar {
+    display: none;
+  }
+  
+  /* تعديلات المحتوى الرئيسي */
+  main {
+    margin-right: 0;
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 70px; /* مساحة للقائمة السفلية */
+  }
+  
+  /* قائمة التنقل السفلية */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 60px;
+  }
+  
+  .mobile-bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  
+  .mobile-bottom-nav-item.active {
+    color: var(--primary-color);
+  }
+  
+  .mobile-bottom-nav-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+  
+  /* زر القائمة الرئيسية */
+  .mobile-menu-button {
+    position: fixed;
+    bottom: 70px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    border: none;
+    font-size: 24px;
+  }
+  
+  /* قائمة الإعدادات المنبثقة */
+  .mobile-menu-popup {
+    position: fixed;
+    bottom: 130px;
+    left: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    width: 200px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .mobile-menu-popup.active {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .mobile-menu-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mobile-menu-popup ul li {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mobile-menu-popup ul li a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .mobile-menu-popup ul li:last-child a {
+    border-bottom: none;
+  }
+  
+  .mobile-menu-popup ul li a:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* تعديلات الهيدر */
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-content {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-content .logo {
+    text-align: center;
+  }
+  
+  .header-content nav {
+    position: absolute;
+    left: 10px;
+  }
+  
+  /* تعديلات الفوتر */
+  footer {
+    margin-bottom: 60px;
+  }
+}

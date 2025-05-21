@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة النظام - نظام إدارة المدرسة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        .admin-content {
+            padding: 20px;
+        }
+        .admin-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .admin-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .admin-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .admin-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .admin-card ul li {
+            margin-bottom: 10px;
+        }
+        .admin-card ul li a {
+            display: block;
+            padding: 8px 10px;
+            background-color: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .admin-card ul li a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .demo-notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .system-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .system-info h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .system-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .system-info table th, .system-info table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: right;
+        }
+        .system-info table th {
+            font-weight: bold;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية الجديدة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="users.html">إدارة المستخدمين</a></li>
+                <li><a href="attendance.html">تسجيل الحضور</a></li>
+                <li><a href="behavior.html">تقارير السلوك</a></li>
+                <li><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li><a href="permissions.html">أذونات الخروج</a></li>
+                <li><a href="reports.html">التقارير</a></li>
+                <li><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content admin-content">
+            <h2>إدارة النظام</h2>
+
+
+            <div class="admin-panel">
+                <div class="admin-card">
+                    <h3>إدارة المستخدمين والصلاحيات</h3>
+                    <ul>
+                        <li><a href="users.html">إدارة المستخدمين</a></li>
+                        <li><a href="#">إدارة الأدوار والصلاحيات</a></li>
+                        <li><a href="#">تعيين مشرفين جدد</a></li>
+                        <li><a href="#">سجل نشاط المستخدمين</a></li>
+                    </ul>
+                </div>
+
+                <div class="admin-card">
+                    <h3>إدارة البيانات</h3>
+                    <ul>
+                        <li><a href="#">إنشاء نسخة احتياطية</a></li>
+                        <li><a href="#">استعادة نسخة احتياطية</a></li>
+                        <li><a href="#">تصدير البيانات</a></li>
+                        <li><a href="#">استيراد البيانات</a></li>
+                    </ul>
+                </div>
+
+                <div class="admin-card">
+                    <h3>إعدادات النظام</h3>
+                    <ul>
+                        <li><a href="#">إعدادات عامة</a></li>
+                        <li><a href="#">إعدادات البريد الإلكتروني</a></li>
+                        <li><a href="#">إعدادات الأمان</a></li>
+                        <li><a href="#">إعدادات الإشعارات</a></li>
+                    </ul>
+                </div>
+
+                <div class="admin-card">
+                    <h3>تخصيص النظام</h3>
+                    <ul>
+                        <li><a href="#">تغيير شعار المدرسة</a></li>
+                        <li><a href="#">تخصيص الألوان</a></li>
+                        <li><a href="#">تخصيص القوالب</a></li>
+                        <li><a href="#">إدارة الصفحات</a></li>
+                    </ul>
+                </div>
+
+                <div class="admin-card">
+                    <h3>إدارة المدرسة</h3>
+                    <ul>
+                        <li><a href="#">إعدادات المدرسة</a></li>
+                        <li><a href="#">إدارة الصفوف</a></li>
+                        <li><a href="#">إدارة المواد الدراسية</a></li>
+                        <li><a href="#">إدارة الجدول الدراسي</a></li>
+                    </ul>
+                </div>
+
+                <div class="admin-card">
+                    <h3>أدوات متقدمة</h3>
+                    <ul>
+                        <li><a href="#">إعادة تعيين النظام</a></li>
+                        <li><a href="#">تنظيف قاعدة البيانات</a></li>
+                        <li><a href="#">تحديث النظام</a></li>
+                        <li><a href="#">سجل الأخطاء</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="system-info">
+                <h3>معلومات النظام</h3>
+                <table>
+                    <tr>
+                        <th>إصدار النظام</th>
+                        <td>1.0.0</td>
+                    </tr>
+                    <tr>
+                        <th>تاريخ آخر تحديث</th>
+                        <td>28/04/2025</td>
+                    </tr>
+                    <tr>
+                        <th>عدد المستخدمين</th>
+                        <td>42</td>
+                    </tr>
+                    <tr>
+                        <th>عدد الطلاب</th>
+                        <td>1250</td>
+                    </tr>
+                    <tr>
+                        <th>حالة النظام</th>
+                        <td>نشط</td>
+                    </tr>
+                    <tr>
+                        <th>حالة قاعدة البيانات</th>
+                        <td>متصلة</td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script>
+    <script src="js/top-nav.js"></script>
+
+</body>
+</html>

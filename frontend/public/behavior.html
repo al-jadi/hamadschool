@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقارير السلوك - نظام إدارة المدرسة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        .behavior-content {
+            padding: 20px;
+        }
+        .behavior-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .behavior-table th, .behavior-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        .behavior-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .behavior-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .behavior-table tr:hover {
+            background-color: #e9e9e9;
+        }
+        .add-report-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .demo-notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .filter-options {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .status-new {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        .status-processing {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-resolved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .view-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية الجديدة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="users.html">إدارة المستخدمين</a></li>
+                <li><a href="attendance.html">تسجيل الحضور</a></li>
+                <li><a href="behavior.html">تقارير السلوك</a></li>
+                <li><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li><a href="permissions.html">أذونات الخروج</a></li>
+                <li><a href="reports.html">التقارير</a></li>
+                <li><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content behavior-content">
+            <h2>تقارير السلوك</h2>
+
+
+            <button class="add-report-btn">إضافة تقرير سلوك جديد</button>
+
+            <div class="filter-options">
+                <label for="class-filter">الصف:</label>
+                <select id="class-filter">
+                    <option value="all">جميع الصفوف</option>
+                    <option value="1a">الأول أ</option>
+                    <option value="1b">الأول ب</option>
+                    <option value="2a">الثاني أ</option>
+                </select>
+                <label for="date-filter">التاريخ:</label>
+                <input type="date" id="date-filter" value="2025-04-28">
+                <label for="status-filter">الحالة:</label>
+                <select id="status-filter">
+                    <option value="all">جميع الحالات</option>
+                    <option value="new">جديد</option>
+                    <option value="processing">قيد المعالجة</option>
+                    <option value="resolved">تم الحل</option>
+                </select>
+            </div>
+
+            <table class="behavior-table">
+                <thead>
+                    <tr>
+                        <th>رقم التقرير</th>
+                        <th>اسم الطالب</th>
+                        <th>الصف</th>
+                        <th>نوع المخالفة</th>
+                        <th>تاريخ التقرير</th>
+                        <th>المعلم المسؤول</th>
+                        <th>الحالة</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>B-1001</td>
+                        <td>عبدالله سالم</td>
+                        <td>الأول أ</td>
+                        <td>تأخر متكرر</td>
+                        <td>25/04/2025</td>
+                        <td>أحمد محمد</td>
+                        <td><span class="status-badge status-new">جديد</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-1002</td>
+                        <td>محمد خالد</td>
+                        <td>الثاني أ</td>
+                        <td>عدم إكمال الواجبات</td>
+                        <td>24/04/2025</td>
+                        <td>سارة أحمد</td>
+                        <td><span class="status-badge status-processing">قيد المعالجة</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-1003</td>
+                        <td>علي حسن</td>
+                        <td>الأول ب</td>
+                        <td>سلوك غير لائق</td>
+                        <td>23/04/2025</td>
+                        <td>فهد سعيد</td>
+                        <td><span class="status-badge status-resolved">تم الحل</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-1004</td>
+                        <td>سعود فهد</td>
+                        <td>الثاني أ</td>
+                        <td>غياب متكرر</td>
+                        <td>22/04/2025</td>
+                        <td>محمد علي</td>
+                        <td><span class="status-badge status-processing">قيد المعالجة</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script> <!-- Include API config -->
+    <script src="js/api.js"></script> <!-- Include API client -->
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script> <!-- Keep for now -->
+    <script src="js/top-nav.js"></script>
+    <script src="js/behavior.js"></script> <!-- Add behavior specific logic -->
+</body>
+</html>

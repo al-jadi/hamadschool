@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإجراءات الإدارية - نظام إدارة المدرسة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        .actions-content {
+            padding: 20px;
+        }
+        .actions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .actions-table th, .actions-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        .actions-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .actions-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .actions-table tr:hover {
+            background-color: #e9e9e9;
+        }
+        .add-action-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .demo-notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .filter-options {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .status-pending {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        .status-approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .view-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية الجديدة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="users.html">إدارة المستخدمين</a></li>
+                <li><a href="attendance.html">تسجيل الحضور</a></li>
+                <li><a href="behavior.html">تقارير السلوك</a></li>
+                <li><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li><a href="permissions.html">أذونات الخروج</a></li>
+                <li><a href="reports.html">التقارير</a></li>
+                <li><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content actions-content">
+            <h2>الإجراءات الإدارية</h2>
+
+
+            <button class="add-action-btn">إضافة إجراء إداري جديد</button>
+
+            <div class="filter-options">
+                <label for="action-type-filter">نوع الإجراء:</label>
+                <select id="action-type-filter">
+                    <option value="all">جميع الأنواع</option>
+                    <option value="call_parent">استدعاء ولي أمر</option>
+                    <option value="student_pledge">تعهد طالب</option>
+                    <option value="suspension">فصل</option>
+                </select>
+                <label for="date-filter">التاريخ:</label>
+                <input type="date" id="date-filter" value="2025-04-28">
+                <label for="status-filter">الحالة:</label>
+                <select id="status-filter">
+                    <option value="all">جميع الحالات</option>
+                    <option value="pending">معلق</option>
+                    <option value="approved">تمت الموافقة</option>
+                    <option value="rejected">مرفوض</option>
+                </select>
+            </div>
+
+            <table class="actions-table">
+                <thead>
+                    <tr>
+                        <th>رقم الإجراء</th>
+                        <th>اسم الطالب</th>
+                        <th>الصف</th>
+                        <th>نوع الإجراء</th>
+                        <th>تاريخ الإجراء</th>
+                        <th>المسؤول</th>
+                        <th>الحالة</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A-2001</td>
+                        <td>عبدالله سالم</td>
+                        <td>الأول أ</td>
+                        <td>استدعاء ولي أمر</td>
+                        <td>27/04/2025</td>
+                        <td>خالد عبدالله</td>
+                        <td><span class="status-badge status-pending">معلق</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A-2002</td>
+                        <td>محمد خالد</td>
+                        <td>الثاني أ</td>
+                        <td>تعهد طالب</td>
+                        <td>26/04/2025</td>
+                        <td>محمد علي</td>
+                        <td><span class="status-badge status-approved">تمت الموافقة</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A-2003</td>
+                        <td>علي حسن</td>
+                        <td>الأول ب</td>
+                        <td>فصل</td>
+                        <td>25/04/2025</td>
+                        <td>خالد عبدالله</td>
+                        <td><span class="status-badge status-rejected">مرفوض</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="view-btn">عرض</button>
+                                <button class="edit-btn">تعديل</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script> <!-- Include API config -->
+    <script src="js/api.js"></script> <!-- Include API client -->
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script> <!-- Keep for now -->
+    <script src="js/top-nav.js"></script>
+    <script src="js/actions.js"></script> <!-- Add actions specific logic -->
+</body>
+</html>

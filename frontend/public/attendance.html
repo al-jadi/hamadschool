@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الحضور - نظام إدارة المدرسة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        /* أنماط إضافية لصفحة تسجيل الحضور */
+        .attendance-content {
+            padding: 20px;
+        }
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        .attendance-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .attendance-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .attendance-table tr:hover {
+            background-color: #e9e9e9;
+        }
+        .status-select {
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .present {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .absent {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .late {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .save-attendance-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .demo-notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .filter-options {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية الجديدة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="users.html">إدارة المستخدمين</a></li>
+                <li><a href="attendance.html">تسجيل الحضور</a></li>
+                <li><a href="behavior.html">تقارير السلوك</a></li>
+                <li><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li><a href="permissions.html">أذونات الخروج</a></li>
+                <li><a href="reports.html">التقارير</a></li>
+                <li><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content attendance-content">
+            <h2>تسجيل الحضور والغياب</h2>
+
+
+            <div class="filter-options">
+                <label for="class-filter">الصف:</label>
+                <select id="class-filter">
+                    <option value="1a">الأول أ</option>
+                    <option value="1b">الأول ب</option>
+                    <option value="2a">الثاني أ</option>
+                </select>
+                <label for="date-filter">التاريخ:</label>
+                <input type="date" id="date-filter" value="2025-04-28">
+                <label for="period-filter">الحصة:</label>
+                <select id="period-filter">
+                    <option value="all">اليوم كامل</option>
+                    <option value="1">الأولى</option>
+                    <option value="2">الثانية</option>
+                    <option value="3">الثالثة</option>
+                    <option value="4">الرابعة</option>
+                    <option value="5">الخامسة</option>
+                    <option value="6">السادسة</option>
+                    <option value="7">السابعة</option>
+                </select>
+            </div>
+
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>اسم الطالب</th>
+                        <th>الرقم الأكاديمي</th>
+                        <th>الحالة</th>
+                        <th>ملاحظات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>عبدالله سالم</td>
+                        <td>1001</td>
+                        <td>
+                            <select class="status-select present">
+                                <option value="present" selected>حاضر</option>
+                                <option value="absent">غائب</option>
+                                <option value="late">متأخر</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="أضف ملاحظة..."></td>
+                    </tr>
+                    <tr>
+                        <td>محمد خالد</td>
+                        <td>1002</td>
+                        <td>
+                            <select class="status-select absent">
+                                <option value="present">حاضر</option>
+                                <option value="absent" selected>غائب</option>
+                                <option value="late">متأخر</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="أضف ملاحظة..." value="غائب بعذر طبي"></td>
+                    </tr>
+                    <tr>
+                        <td>علي حسن</td>
+                        <td>1003</td>
+                        <td>
+                            <select class="status-select late">
+                                <option value="present">حاضر</option>
+                                <option value="absent">غائب</option>
+                                <option value="late" selected>متأخر</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="أضف ملاحظة..." value="تأخر 10 دقائق"></td>
+                    </tr>
+                    <tr>
+                        <td>سعود فهد</td>
+                        <td>1004</td>
+                        <td>
+                            <select class="status-select present">
+                                <option value="present" selected>حاضر</option>
+                                <option value="absent">غائب</option>
+                                <option value="late">متأخر</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="أضف ملاحظة..."></td>
+                    </tr>
+                    <!-- إضافة المزيد من الطلاب حسب الحاجة -->
+                </tbody>
+            </table>
+
+            <button class="save-attendance-btn">حفظ الحضور</button>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script> <!-- Include API config -->
+    <script src="js/api.js"></script> <!-- Include API client -->
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script> <!-- Keep for now -->
+    <script src="js/top-nav.js"></script>
+    <script src="js/attendance.js"></script> <!-- Add attendance specific logic -->
+</body>
+</html>

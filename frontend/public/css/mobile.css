@@ -1,0 +1,114 @@
+/* أنماط خاصة بالأجهزة المحمولة */
+@media (max-width: 768px) {
+  /* تعديلات عامة للتخطيط */
+  .container {
+    padding: 0 10px;
+  }
+  
+  .main-layout {
+    display: block;
+  }
+  
+  /* تعديلات الشريط الجانبي */
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    right: -250px;
+    width: 250px;
+    height: calc(100vh - 60px);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+  }
+  
+  .sidebar.active {
+    right: 0;
+  }
+  
+  /* زر القائمة للأجهزة المحمولة */
+  .mobile-menu-toggle {
+    display: block;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  /* تعديلات المحتوى الرئيسي */
+  main {
+    margin-right: 0;
+    width: 100%;
+    padding-top: 70px;
+  }
+  
+  /* تعديلات الهيدر */
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+  }
+  
+  .header-content {
+    padding: 10px;
+  }
+  
+  /* تعديلات القوائم المنسدلة في الشريط الجانبي */
+  .sidebar-dropdown-content {
+    position: static;
+    box-shadow: none;
+    padding-right: 15px;
+  }
+  
+  .sidebar-dropdown > a::after {
+    float: left;
+  }
+  
+  /* تعديلات الجداول */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* تعديلات البطاقات */
+  .reports-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  /* تعديلات القوائم المنسدلة في الهيدر */
+  .dropdown-content {
+    position: absolute;
+    right: auto;
+    left: 0;
+  }
+  
+  /* تعديلات نموذج تسجيل الدخول */
+  .login-form {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  /* تعديلات الأزرار */
+  button, .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* تعديلات الإشعارات */
+  .demo-notice {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  /* تعديلات الفوتر */
+  footer {
+    text-align: center;
+    padding: 10px;
+  }
+}

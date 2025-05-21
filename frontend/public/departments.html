@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الأقسام - نظام إدارة المدرسة</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <style>
+        .departments-content {
+            padding: 20px;
+        }
+        .add-department-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="شعار المدرسة" height="40">
+                <span>نظام إدارة المدرسة</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="username-display">اسم المستخدم</a>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logout-button">تسجيل الخروج</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القائمة العلوية المحدثة -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <ul class="top-nav-menu">
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head"><a href="users.html">إدارة المستخدمين</a></li>
+                <li data-role="system_admin,assistant_manager"><a href="departments.html">إدارة الأقسام</a></li> <!-- Added Departments Link -->
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="attendance.html">تسجيل الحضور</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="behavior.html">تقارير السلوك</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor"><a href="actions.html">الإجراءات الإدارية</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="permissions.html">أذونات الخروج</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="schedules.html">الجداول الدراسية</a></li>
+                <li data-role="system_admin,assistant_manager,department_head"><a href="substitutions.html">الاستبدالات المؤقتة</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="departmentBulletins.html">نشرات الأقسام</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,parent"><a href="parentBulletins.html">نشرات أولياء الأمور</a></li>
+                <li data-role="system_admin,assistant_manager,admin_supervisor,department_head,teacher"><a href="reports.html">التقارير</a></li>
+                <li data-role="system_admin"><a href="admin.html">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="main-content departments-content">
+            <h2>إدارة الأقسام</h2>
+
+            <button class="add-department-btn" data-role="system_admin,assistant_manager" style="display: none;">إضافة قسم جديد</button>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>اسم القسم</th>
+                        <th>رئيس القسم</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="departments-table-body">
+                    <!-- Department rows will be loaded here by JavaScript -->
+                    <tr>
+                        <td colspan="3" class="text-center">جارٍ تحميل الأقسام...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <!-- Add/Edit Department Modal -->
+    <div class="modal fade" id="department-modal" tabindex="-1" aria-labelledby="department-modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="department-modal-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="department-modal-title">إضافة/تعديل قسم</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="department-id">
+                        <div class="mb-3">
+                            <label for="department-name" class="form-label">اسم القسم:</label>
+                            <input type="text" class="form-control" id="department-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="department-head" class="form-label">رئيس القسم (اختياري):</label>
+                            <select class="form-select" id="department-head">
+                                <option value="">-- لا يوجد --</option>
+                                <!-- Potential heads (teachers/admins) will be loaded here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="submit" class="btn btn-primary">حفظ القسم</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نظام إدارة المدرسة. جميع الحقوق محفوظة. أّ:/حمد يوسف الجدي</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/local-auth.js"></script>
+    <script src="js/admin-permissions.js"></script>
+    <script src="js/top-nav.js"></script>
+    <script src="js/departments.js"></script> <!-- Add departments specific logic -->
+</body>
+</html>
+

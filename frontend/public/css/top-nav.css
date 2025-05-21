@@ -1,0 +1,118 @@
+/* أنماط القائمة العلوية */
+.top-nav {
+  background-color: var(--primary-color);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.top-nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.top-nav-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav-menu li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 15px 10px;
+  transition: background-color 0.3s;
+}
+
+.top-nav-menu li a:hover,
+.top-nav-menu li a.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-nav-menu li a.active {
+  font-weight: bold;
+  border-bottom: 3px solid var(--secondary-color);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+}
+
+.user-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 10px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  height: 40px;
+  margin-left: 10px;
+}
+
+/* تعديلات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .top-nav-container {
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .logo-container {
+    width: 100%;
+    padding: 10px 15px;
+    justify-content: center;
+    background-color: var(--primary-color);
+  }
+  
+  .top-nav-menu {
+    width: 100%;
+    justify-content: space-around;
+    background-color: var(--primary-color);
+  }
+  
+  .top-nav-menu li a {
+    padding: 12px 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .user-menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+
+/* تعديلات للمحتوى الرئيسي */
+.main-content {
+  padding: 20px;
+  width: 100%;
+}
+
+.container.main-layout {
+  display: block;
+}
+
+/* إخفاء الشريط الجانبي */
+.sidebar {
+  display: none;
+}
